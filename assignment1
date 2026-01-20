@@ -1,0 +1,142 @@
+QUESTION 1 :
+ CODE:        #include<iostream>
+              using namespace std;
+               int main(){
+              cout<<"hello world">>
+}
+
+question 2 :
+CODE :      #include<iostream>
+            using namespace std;
+            int main(){
+             int a ;
+            float b;
+            char c;
+            cout<<"enter the value of a: ";
+            cin>>a;
+            cout<<"enter the value of b:";
+            cin>>b;
+            cout<<"enter the value of c:";
+            cin>>c;
+            return 0;
+            }
+
+question 3 :
+CODE: #include<iostream>
+            using namespace std;
+            int main(){
+            int a ;
+            int b;
+            cout<<"enter the value of a :";
+            cin>>a;
+            cout<<"enter the value of b:";
+            cin>>b;
+            int sum = a+b;
+            cout<<"the sum is :"<<sum<<endl;
+            int difference = a-b;
+            cout<<"the difference  is :"<<difference<<endl;
+            int product= a*b;
+            cout<<"the product is :"<<product<<endl;
+            int remainder= a/b;
+            cout<<"the remainder is :"<< remainder<<endl;}
+
+QUESTION 4 : 
+CODE:       #include<iostream>
+            using namespace std;
+            int main(){
+            float celsius;
+            cout<<"enter teh value of temperature in celsuius:";
+            cin>>celsius;
+             float fahrenheit=(9.0/5.0)*(celsius)+32;
+            cout<<"value of temperature in fahrenheit is: "<<fahrenheit;
+            }
+
+QUESTION 5 :
+CODE:    #include<iostream>
+            using namespace std;
+            int main()
+{
+    cout << "Hello\nWorld" << endl;        
+    cout << "Hello\tWorld" << endl;        
+    cout << "Hello\bWorld" << endl;        
+      
+}
+
+QUESTION 6 :
+CODE : #include <iostream>
+using namespace std;
+int main() {
+    int a = 10;
+    a += 5;  
+    cout << "After += : " << a << endl;
+    a -= 3;   
+    cout << "After -= : " << a << endl;
+    return 0;
+}
+
+QUESTION 7:
+CODE :   #include <iostream>
+using namespace std;
+int main() {
+    int a, b;
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+    a = a ^ b;
+    b = a ^ b;
+    a = a ^ b;
+    cout << "After swapping:" << endl;
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    return 0;
+}
+
+QUESTION 8:
+CODE:  #include <iostream>
+using namespace std;
+int main() {
+    int days;
+    cout << "Enter number of days late: ";
+    cin >> days;
+    if (days <= 5)
+        cout << "Fine = 50 paise";
+    else if (days <= 10)
+        cout << "Fine = 1 rupee";
+    else if (days <= 30)
+        cout << "Fine = 5 rupees";
+    else
+        cout << "Membership cancelled";
+    return 0;
+}
+
+QUESTION 9:  
+CODE:  #include <iostream>
+using namespace std;
+int main() {
+    int a, b, choice;
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+  cout << "1.Add  2.Subtract  3.Multiply  4.Divide" << endl;
+    cin >> choice;
+    switch (choice) {
+        case 1: cout << "Sum = " << a + b; break;
+        case 2: cout << "Difference = " << a - b; break;
+        case 3: cout << "Product = " << a * b; break;
+        case 4: cout << "Division = " << a / b; break;
+       
+    }
+    return 0;
+}
+
+QUESTION 10:
+code:  #include <iostream>
+using namespace std;
+int main() {
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+    if (num % 2 == 0)
+        cout << "Number is Even";
+    else
+        cout << "Number is Odd";
+    return 0;
+}
