@@ -1,0 +1,393 @@
+qs 1:
+#include<iostream>
+using namespace std;
+struct Student
+{
+    string name;
+    string degree;
+    string hostel;
+    int roll_no;
+    float CGPA;
+    
+    void addDetails()
+    {
+        cout<<"Enter name: "<<endl;
+        cin >> name;
+        cout<<"Enter roll no.: "<<endl;
+        cin >> roll_no;
+        cout<<"Enter degree: "<<endl;
+        cin >> degree;
+        cout<<"Enter hostel: "<<endl;
+        cin >> hostel;
+        cout<<"Enter current CGPA: "<<endl;
+        cin >> CGPA;
+    }
+    
+    void updateDetails()
+    {
+        cout<< "Enter updated name: "<<endl;
+        cin >> name;
+        cout<<"Enter updated roll no.: "<<endl;
+        cin >> roll_no;
+        cout<<"Enter updated degree: "<<endl;
+        cin >> degree;
+        cout<<"Enter updated hostel: "<<endl;
+        cin >> hostel;
+        cout<<"Enter updated CGPA: "<<endl;
+        cin >> CGPA;
+    }
+    
+    void updateCGPA()
+    {
+        cout<<"Enter new CGPA: "<<endl;
+        cin >> CGPA;
+    }
+     
+     void updateHostel()
+     {
+            cout<<"Enter new hostel: "<<endl;
+            cin >> hostel;    
+     }
+     
+void displayDetails()
+{
+    cout<<" name: "<<name<<endl;
+    cout<<" roll no.: "<<roll_no<<endl;
+    cout<<" degree: "<<degree<<endl;
+    cout<<" hostel: "<<hostel<<endl;
+    cout<<" current CGPA: "<<CGPA<<endl;}
+};
+   
+    
+int main()
+{
+   int n;
+   cout << "Enter number of students: ";
+   cin >> n;
+   
+   Student s[n];
+   
+   for (int i=0; i<n; i++)
+   {
+       cout << "\nEnter details of student "<< i+1 << endl;
+       s[i].addDetails();
+   }
+   for (int i=0; i<n; i++)
+   {
+       cout << "\nDisplaying details of student "<< i+1 << endl;
+       s[i].displayDetails();
+   }
+   for (int i=0; i<n; i++)
+   {
+       cout << "\nUpdating details of student "<< i+1 << endl;
+       s[i].updateDetails();
+   }
+   return 0;
+}
+
+qs 2:
+#include <iostream>
+using namespace std;
+
+class Student
+{
+private:
+    string name;
+    string degree;
+    string hostel;
+    int roll_no;
+    float CGPA;
+
+    void validateCGPA()
+    {
+        if (CGPA < 0 || CGPA > 10)
+        {
+            cout << "Invalid CGPA! Setting CGPA to 0.\n";
+            CGPA = 0;
+        }
+    }
+
+public:
+    void addDetails()
+    {
+        cout << "Enter name: ";
+        cin >> name;
+
+        cout << "Enter roll no.: ";
+        cin >> roll_no;
+
+        cout << "Enter degree: ";
+        cin >> degree;
+
+        cout << "Enter hostel: ";
+        cin >> hostel;
+
+        cout << "Enter current CGPA: ";
+        cin >> CGPA;
+
+        validateCGPA();
+    }
+
+    void updateDetails()
+    {
+        cout << "Enter updated name: ";
+        cin >> name;
+
+        cout << "Enter updated roll no.: ";
+        cin >> roll_no;
+
+        cout << "Enter updated degree: ";
+        cin >> degree;
+
+        cout << "Enter updated hostel: ";
+        cin >> hostel;
+
+        cout << "Enter updated CGPA: ";
+        cin >> CGPA;
+
+        validateCGPA();
+    }
+
+    void updateCGPA()
+    {
+        cout << "Enter new CGPA: ";
+        cin >> CGPA;
+        validateCGPA();
+    }
+
+    void updateHostel()
+    {
+        cout << "Enter new hostel: ";
+        cin >> hostel;
+    }
+
+    void displayDetails()
+    {
+        cout << "\nName: " << name;
+        cout << "\nRoll No.: " << roll_no;
+        cout << "\nDegree: " << degree;
+        cout << "\nHostel: " << hostel;
+        cout << "\nCurrent CGPA: " << CGPA << endl;
+    }
+};
+
+int main()
+{
+    int n;
+    cout << "Enter number of students: ";
+    cin >> n;
+
+    Student s[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "\nEnter details of student " << i + 1 << endl;
+        s[i].addDetails();
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "\nDisplaying details of student " << i + 1 << endl;
+        s[i].displayDetails();
+    }
+
+    return 0;
+}
+
+qs 3:
+#include <iostream>
+using namespace std;
+
+class Sample
+{
+private:
+    void privateFunction()
+    {
+        cout << "This is a private member function." << endl;
+    }
+
+public:
+    void publicFunction()
+    {
+        cout << "Public function called." << endl;
+        privateFunction();
+    }
+};
+
+int main()
+{
+    Sample obj;
+    obj.publicFunction();
+
+    return 0;
+}
+
+qs 4:
+#include <iostream>
+using namespace std;
+
+class Rectangle
+{
+    int width;
+    int height;
+
+public:
+    void getdata()
+    {
+        cout << "Enter width: ";
+        cin >> width;
+
+        cout << "Enter height: ";
+        cin >> height;
+    }
+
+    void calculatearea()
+    {
+        int area = width * height;
+        cout << "Area of Rectangle = " << area << endl;
+    }
+};
+
+int main()
+{
+    Rectangle r;
+    r.getdata();
+    r.calculatearea();
+
+    return 0;
+}
+
+qs 5:
+#include <iostream>
+using namespace std;
+
+class Complex {
+public:
+    float real, imag;
+
+    void input() {
+        cout << "Enter real part: ";
+        cin >> real;
+        cout << "Enter imaginary part: ";
+        cin >> imag;
+    }
+
+    void sumComplex(Complex c1, Complex c2) {
+        real = c1.real + c2.real;
+        imag = c1.imag + c2.imag;
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+};
+
+int main() {
+    Complex c1, c2, sum;
+
+    c1.input();
+    c2.input();
+
+    sum.sumComplex(c1, c2);
+
+    cout << "Sum = ";
+    sum.display();
+
+    return 0;
+}
+
+qs 6: 
+(a)#include <iostream>
+using namespace std;
+
+class Demo
+{
+public:
+    void show();   
+};
+
+void Demo::show()
+{
+    cout << "Function defined outside the class" << endl;
+}
+
+int main()
+{
+    Demo d;
+    d.show();
+    return 0;
+}
+(b) #include <iostream>
+using namespace std;
+
+int x = 10;   // global variable
+
+int main()
+{
+    int x = 20;   // local variable
+
+    cout << " x = " << ::x << endl;
+   
+
+    return 0;
+}
+(c)#include <iostream>
+using namespace std;
+
+class Test
+{
+public:
+    static int count;
+};
+
+int Test::count = 5;   
+
+int main()
+{
+    cout << "Static count = " << Test::count << endl;
+    return 0;
+}
+(d) #include <iostream>
+
+int main()
+{
+    std::cout << "Enter a number: ";
+    int x;
+    std::cin >> x;
+
+    std::cout << "You entered: " << x << std::endl;
+    return 0;
+}
+
+qs 7:
+#include <iostream>
+using namespace std;
+
+namespace First
+{
+    int x = 10;
+
+    void show()
+    {
+        cout << "First namespace x = " << x << endl;
+    }
+}
+
+namespace Second
+{
+    int x = 20;
+
+    void show()
+    {
+        cout << "Second namespace x = " << x << endl;
+    }
+}
+
+int main()
+{
+    First::show();
+    Second::show();
+
+    return 0;
+}
+
