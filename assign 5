@@ -1,0 +1,310 @@
+1. #include <iostream>
+using namespace std;
+
+class Base {
+public:
+    void show() {
+        cout << "Base class function\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    void display() {
+        cout << "Derived class function\n";
+    }
+};
+
+int main() {
+    Base b;
+    Derived d;
+    b.show();
+    d.show();
+    d.display();
+    return 0;
+}
+
+2. #include <iostream>
+using namespace std;
+
+class Base {
+protected:
+    int x;
+public:
+    Base() {
+        x = 10;
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() {
+        cout << x << endl;
+    }
+};
+
+int main() {
+    Derived d;
+    d.show();
+    return 0;
+}
+
+3. #include <iostream>
+using namespace std;
+
+class Base {
+public:
+    int a;
+protected:
+    int b;
+private:
+    int c;
+public:
+    Base() {
+        a = 1; b = 2; c = 3;
+    }
+};
+
+class PublicDerived : public Base {
+public:
+    void show() {
+        cout << a << " " << b << endl;
+    }
+};
+
+class ProtectedDerived : protected Base {
+public:
+    void show() {
+        cout << a << " " << b << endl;
+    }
+};
+
+class PrivateDerived : private Base {
+public:
+    void show() {
+        cout << a << " " << b << endl;
+    }
+};
+
+int main() {
+    PublicDerived p;
+    ProtectedDerived pr;
+    PrivateDerived pv;
+    p.show();
+    pr.show();
+    pv.show();
+    return 0;
+}
+
+4. #include <iostream>
+using namespace std;
+
+class Base {
+public:
+    Base() {
+        cout << "Base Constructor\n";
+    }
+    ~Base() {
+        cout << "Base Destructor\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    Derived() {
+        cout << "Derived Constructor\n";
+    }
+    ~Derived() {
+        cout << "Derived Destructor\n";
+    }
+};
+
+int main() {
+    Derived d;
+    return 0;
+}
+
+5. #include <iostream>
+using namespace std;
+
+class Book {
+public:
+    string title, author;
+    float price;
+    void getData() {
+        cin >> title >> author >> price;
+    }
+    void showData() {
+        cout << title << " " << author << " " << price << endl;
+    }
+};
+
+class Textbook : public Book {
+public:
+    string subject;
+    void getTextbook() {
+        getData();
+        cin >> subject;
+    }
+    void showTextbook() {
+        showData();
+        cout << subject << endl;
+    }
+};
+
+int main() {
+    Textbook t;
+    t.getTextbook();
+    t.showTextbook();
+    return 0;
+}
+
+6. #include <iostream>
+using namespace std;
+
+class Speedometer {
+public:
+    int speed;
+    void setSpeed(int s) { speed = s; }
+};
+
+class FuelGauge {
+public:
+    int fuel;
+    void setFuel(int f) { fuel = f; }
+};
+
+class Thermometer {
+public:
+    int temp;
+    void setTemp(int t) { temp = t; }
+};
+
+class CarDashboard : public Speedometer, public FuelGauge, public Thermometer {
+public:
+    void display() {
+        cout << speed << " " << fuel << " " << temp << endl;
+    }
+};
+
+int main() {
+    CarDashboard c;
+    c.setSpeed(80);
+    c.setFuel(50);
+    c.setTemp(90);
+    c.display();
+    return 0;
+}
+
+7. #include <iostream>
+using namespace std;
+
+class LibraryUser {
+public:
+    string name, id;
+};
+
+class Student : public LibraryUser {
+public:
+    int grade;
+    void display() {
+        cout << name << " " << id << " " << grade << endl;
+    }
+};
+
+class Teacher : public LibraryUser {
+public:
+    string department;
+    void display() {
+        cout << name << " " << id << " " << department << endl;
+    }
+};
+
+int main() {
+    Student s;
+    Teacher t;
+
+    s.name = "A";
+    s.id = "S1";
+    s.grade = 10;
+
+    t.name = "B";
+    t.id = "T1";
+    t.department = "Math";
+
+    s.display();
+    t.display();
+    return 0;
+}
+
+8. #include <iostream>
+using namespace std;
+
+class Vehicle {
+public:
+    string make, model;
+    int year;
+};
+
+class Truck : public Vehicle {
+public:
+    int load_capacity;
+};
+
+class RefrigeratedTruck : public Truck {
+public:
+    int temperature_control;
+    void display() {
+        cout << make << " " << model << " " << year << " " << load_capacity << " " << temperature_control << endl;
+    }
+};
+
+int main() {
+    RefrigeratedTruck r;
+    r.make = "Tata";
+    r.model = "X";
+    r.year = 2022;
+    r.load_capacity = 5000;
+    r.temperature_control = -10;
+    r.display();
+    return 0;
+}
+
+9. #include <iostream>
+using namespace std;
+
+class Person {
+public:
+    string name, address;
+};
+
+class Staff : virtual public Person {
+public:
+    int employee_id;
+    string department;
+};
+
+class Student : virtual public Person {
+public:
+    int student_id;
+    string grade;
+};
+
+class TeachingAssistant : public Staff, public Student {
+public:
+    void display() {
+        cout << name << " " << address << " " << employee_id << " " << department << " " << student_id << " " << grade << endl;
+    }
+};
+
+int main() {
+    TeachingAssistant t;
+    t.name = "Hezal";
+    t.address = "Punjab";
+    t.employee_id = 101;
+    t.department = "CSE";
+    t.student_id = 202;
+    t.grade = "A";
+    t.display();
+    return 0;
+}
