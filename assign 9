@@ -1,0 +1,219 @@
+ques 1:
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    ofstream fout("NUM.txt");
+
+    for(int i=1;i<=200;i++)
+        fout<<i<<" ";
+
+    fout.close();
+    return 0;
+}
+
+ques 2:
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+void countAlpha() {
+    ifstream fin("NOTES.txt");
+    char ch;
+    int count=0;
+
+    while(fin.get(ch)) {
+        if(isalpha(ch))
+            count++;
+    }
+
+    cout<<count;
+    fin.close();
+}
+
+int main() {
+    countAlpha();
+    return 0;
+}
+
+ques 3:
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+class Student {
+    int roll;
+public:
+    void input() {
+        cin>>roll;
+    }
+    void display() {
+        cout<<roll;
+    }
+};
+
+int main() {
+    Student s;
+
+    ofstream fout("data.dat", ios::binary);
+    s.input();
+    fout.write((char*)&s, sizeof(s));
+    fout.close();
+
+    ifstream fin("data.dat", ios::binary);
+    fin.read((char*)&s, sizeof(s));
+    s.display();
+    fin.close();
+
+    return 0;
+}
+
+ques 4:
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    ifstream fin("a.txt");
+    ofstream fout("b.txt");
+
+    char ch;
+    while(fin.get(ch))
+        fout.put(ch);
+
+    fin.close();
+    fout.close();
+    return 0;
+}
+
+ques 5:
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+
+int main() {
+    string str;
+    getline(cin,str);
+
+    cout<<str.length()<<endl;
+
+    ofstream fout("file.txt");
+    fout<<str;
+    fout.close();
+
+    ifstream fin("file.txt");
+    string s;
+    getline(fin,s);
+    cout<<s;
+
+    fin.close();
+    return 0;
+}
+
+ques 6: (a)
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    ofstream fout("AZ.txt");
+    for(char c='A';c<='Z';c++)
+        fout<<c;
+    fout.close();
+
+    ifstream fin("AZ.txt");
+    fin.seekg(9);
+    char ch;
+    fin.get(ch);
+    cout<<ch;
+    fin.close();
+    return 0;
+}
+
+ (b)
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    fstream file("num.txt", ios::in|ios::out);
+    file.seekp(4);
+    file<<"9";
+    file.close();
+    return 0;
+}
+
+(c)
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    ifstream fin("file.txt");
+    fin.seekg(0, ios::end);
+    cout<<fin.tellg();
+    fin.close();
+    return 0;
+}
+
+(d)
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    ifstream fin("file.txt");
+    fin.seekg(-1, ios::end);
+    char ch;
+    fin.get(ch);
+    cout<<ch;
+    fin.close();
+    return 0;
+}
+
+(e)
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    ifstream fin("data.txt");
+
+    fin.seekg(10);
+    cout<<fin.tellg()<<endl;
+
+    char ch;
+    while(fin.get(ch))
+        cout<<ch;
+
+    fin.close();
+    return 0;
+}
+
+(f)
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main() {
+    fstream file("test.txt", ios::out|ios::in);
+
+    string str="HelloWorld";
+    for(int i=0;i<str.length();i++) {
+        file.put(str[i]);
+        cout<<file.tellp()<<" ";
+    }
+
+    file.seekp(5);
+    file<<"C++";
+
+    file.seekg(0);
+    char ch;
+    while(file.get(ch))
+        cout<<ch;
+
+    file.close();
+    return 0;
+}
