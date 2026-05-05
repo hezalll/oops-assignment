@@ -1,0 +1,255 @@
+ques 1:
+#include<iostream>
+using namespace std;
+
+class Book {
+public:
+    string title, author;
+    int ISBN;
+
+    void setDetails(string &title, string &author, int &ISBN) {
+        this->title = title;
+        this->author = author;
+        this->ISBN = ISBN;
+    }
+};
+
+class Library {
+    Book books[100];
+    int count;
+
+public:
+    Library() { count = 0; }
+
+    bool addNewBook(string &title, string &author, int &ISBN) {
+        if(count >= 100) return false;
+        books[count].setDetails(title, author, ISBN);
+        count++;
+        return true;
+    }
+
+    bool removeBooks(int &ISBN);
+
+    void displayDetails() {
+        cout << "\nLibrary Books:\n";
+        for(int i=0; i<count; i++) {
+            cout << books[i].title << " "
+                 << books[i].author << " "
+                 << books[i].ISBN << endl;
+        }
+    }
+};
+
+bool Library::removeBooks(int &ISBN) {
+    for(int i=0; i<count; i++) {
+        if(books[i].ISBN == ISBN) {
+            books[i] = books[count-1];
+            count--;
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    Library l;
+
+    string t, a;
+    int id;
+
+    for(int i=0; i<5; i++) {
+        cout << "\nEnter title, author, ISBN: ";
+        cin >> t >> a >> id;
+        l.addNewBook(t, a, id);
+    }
+
+    l.displayDetails();
+
+    cout << "\nEnter ISBN to remove: ";
+    cin >> id;
+    l.removeBooks(id);
+
+    cout << "\nAfter removal:\n";
+    l.displayDetails();
+
+    return 0;
+}
+
+ques 2:
+#include<iostream>
+using namespace std;
+
+class Book {
+public:
+    string title, author;
+    int ISBN;
+
+    Book() {
+        this->title = "";
+        this->author = "";
+        this->ISBN = 0;
+    }
+
+    Book(string title, string author, int ISBN) {
+        this->title = title;
+        this->author = author;
+        this->ISBN = ISBN;
+    }
+
+    Book(const Book &b) {
+        this->title = b.title;
+        this->author = b.author;
+        this->ISBN = b.ISBN;
+    }
+
+    void display() {
+        cout << title << " " << author << " " << ISBN << endl;
+    }
+};
+
+int main() {
+
+    Book b1[3] = {
+        Book("A","X",1),
+        Book("B","Y",2),
+        Book("C","Z",3)
+    };
+
+    for(int i=0;i<3;i++)
+        b1[i].display();
+
+    int n = 2;
+    Book *b2 = new Book[n];
+
+    b2[0] = Book("D","P",4);
+    b2[1] = Book("E","Q",5);
+
+    for(int i=0;i<n;i++)
+        b2[i].display();
+
+    delete[] b2;
+
+    return 0;
+}
+
+ques 3:
+#include<iostream>
+using namespace std;
+
+class Account {
+    const long accNo;
+    long transactionID;
+    string type;
+    double balance;
+
+public:
+    Account(long acc, double bal) : accNo(acc) {
+        balance = bal;
+        transactionID = 0;
+        type = "none";
+    }
+
+    long depositAmount(const long to, const long from, const double amount) {
+        if(accNo == to) {
+            balance += amount;
+            type = "credit";
+            return ++transactionID;
+        }
+        return -1;
+    }
+
+    long creditAmount(const long to, const long from, const double amount) {
+        if(accNo == from) {
+            balance -= amount;
+            type = "debit";
+            return ++transactionID;
+        }
+        return -1;
+    }
+
+    void displayDetails() const {
+        cout << accNo << " " << balance << " " << type << endl;
+    }
+};
+
+int main() {
+    Account a1(101, 1000), a2(102, 2000);
+
+    a1.depositAmount(101,102,500);
+    a2.creditAmount(101,102,300);
+
+    a1.displayDetails();
+    a2.displayDetails();
+
+    return 0;
+}
+
+ques 4:
+#include<iostream>
+using namespace std;
+
+class B;
+
+class A {
+    int x;
+public:
+    A(int a) { x = a; }
+    friend int add(A, B);
+};
+
+class B {
+    int y;
+public:
+    B(int b) { y = b; }
+    friend int add(A, B);
+};
+
+int add(A a, B b) {
+    return a.x + b.y;
+}
+
+int main() {
+    A a(5);
+    B b(10);
+
+    cout << add(a,b);
+
+    return 0;
+}
+
+ques 5:
+#include<iostream>
+using namespace std;
+
+class Complex {
+    int real, imag;
+
+public:
+    Complex(int r=0, int i=0) {
+        real = r;
+        imag = i;
+    }
+
+    Complex(const Complex &c) {
+        real = c.real;
+        imag = c.imag;
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+
+    friend Complex sum(Complex, Complex);
+};
+
+Complex sum(Complex a, Complex b) {
+    return Complex(a.real + b.real, a.imag + b.imag);
+}
+
+int main() {
+    Complex c1(2,3), c2(4,5);
+    Complex c3 = sum(c1,c2);
+    c3.display();
+    return 0;
+}
+ 
