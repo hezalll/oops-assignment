@@ -1,0 +1,413 @@
+ques 1:
+#include<iostream>
+using namespace std;
+
+class Polygon {
+protected:
+    int width, height;
+public:
+    void set_value(int w, int h) {
+        width = w;
+        height = h;
+    }
+    virtual int area() { return 0; }
+};
+
+class Rectangle : public Polygon {
+public:
+    int area() {
+        return width * height;
+    }
+};
+
+class Triangle : public Polygon {
+public:
+    int area() {
+        return width * height / 2;
+    }
+};
+
+int main() {
+    Polygon *p;
+    Rectangle r;
+    Triangle t;
+
+    r.set_value(4,5);
+    t.set_value(4,5);
+
+    p = &r;
+    cout << p->area() << endl;
+
+    p = &t;
+    cout << p->area();
+
+    return 0;
+}
+
+ques 2:
+#include<iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual void area() = 0;
+    virtual void display() = 0;
+};
+
+class Circle : public Shape {
+    int r;
+public:
+    Circle(int r) { this->r = r; }
+    void area() { cout << 3.14*r*r << endl; }
+    void display() { cout << "Circle\n"; }
+};
+
+class Rectangle : public Shape {
+    int l,b;
+public:
+    Rectangle(int l,int b){ this->l=l; this->b=b; }
+    void area(){ cout << l*b << endl; }
+    void display(){ cout << "Rectangle\n"; }
+};
+
+class Triangle : public Shape {
+    int b,h;
+public:
+    Triangle(int b,int h){ this->b=b; this->h=h; }
+    void area(){ cout << 0.5*b*h << endl; }
+    void display(){ cout << "Triangle\n"; }
+};
+
+int main(){
+    Shape *s;
+    Circle c(5);
+    Rectangle r(4,6);
+    Triangle t(4,5);
+
+    s=&c; s->display(); s->area();
+    s=&r; s->display(); s->area();
+    s=&t; s->display(); s->area();
+
+    return 0;
+}
+
+ques 3:
+#include<iostream>
+using namespace std;
+
+float area(float b,float h) {
+    return 0.5*b*h;
+}
+
+float area(float a) {
+    return 1.732/4*a*a;
+}
+
+float area(float a,float b,float c) {
+    float s=(a+b+c)/2;
+    return sqrt(s*(s-a)*(s-b)*(s-c));
+}
+
+int main(){
+    cout<<area(4,5)<<endl;
+    cout<<area(3)<<endl;
+    cout<<area(3,4,5);
+    return 0;
+}
+
+ques 4:
+#include<iostream>
+using namespace std;
+
+class Student {
+public:
+    virtual void show() = 0;
+};
+
+class Engineering : public Student {
+public:
+    void show(){ cout<<"Engineering\n"; }
+};
+
+class Medicine : public Student {
+public:
+    void show(){ cout<<"Medicine\n"; }
+};
+
+class Science : public Student {
+public:
+    void show(){ cout<<"Science\n"; }
+};
+
+int main(){
+    Student *s[3];
+    Engineering e; Medicine m; Science sc;
+
+    s[0]=&e; s[1]=&m; s[2]=&sc;
+
+    for(int i=0;i<3;i++)
+        s[i]->show();
+
+    return 0;
+}
+
+ques 5:
+#include<iostream>
+using namespace std;
+
+class Time {
+    int h,m,s;
+public:
+    Time(int h=0,int m=0,int s=0){
+        this->h=h; this->m=m; this->s=s;
+    }
+
+    Time operator+(Time t){
+        Time temp;
+        temp.s=s+t.s;
+        temp.m=m+t.m+temp.s/60;
+        temp.s%=60;
+        temp.h=h+t.h+temp.m/60;
+        temp.m%=60;
+        return temp;
+    }
+
+    void show(){
+        cout<<h<<":"<<m<<":"<<s;
+    }
+};
+
+int main(){
+    Time t1(5,15,34),t2(9,53,58),t3;
+    t3=t1+t2;
+    t3.show();
+    return 0;
+}
+
+ques 6:
+#include<iostream>
+#include<string>
+using namespace std;
+
+class STRING {
+    string str;
+public:
+    STRING(string s=""){ str=s; }
+
+    bool operator==(STRING s){
+        return str==s.str;
+    }
+
+    STRING operator+(STRING s){
+        return STRING(str+s.str);
+    }
+
+    void display(){ cout<<str; }
+};
+
+int main(){
+    STRING s1("Hello"),s2("World"),s3;
+    s3=s1+s2;
+    s3.display();
+    return 0;
+}
+
+ques 7:
+#include<iostream>
+using namespace std;
+
+class Matrix {
+    int a[2][2];
+public:
+    void input(){
+        for(int i=0;i<2;i++)
+            for(int j=0;j<2;j++)
+                cin>>a[i][j];
+    }
+
+    void display(){
+        for(int i=0;i<2;i++){
+            for(int j=0;j<2;j++)
+                cout<<a[i][j]<<" ";
+            cout<<endl;
+        }
+    }
+
+    friend Matrix operator*(Matrix,Matrix);
+};
+
+Matrix operator*(Matrix m1,Matrix m2){
+    Matrix m;
+    for(int i=0;i<2;i++){
+        for(int j=0;j<2;j++){
+            m.a[i][j]=0;
+            for(int k=0;k<2;k++)
+                m.a[i][j]+=m1.a[i][k]*m2.a[k][j];
+        }
+    }
+    return m;
+}
+
+int main(){
+    Matrix m1,m2,m3;
+    m1.input(); m2.input();
+    m3=m1*m2;
+    m3.display();
+    return 0;
+}
+
+ques 8:
+#include<iostream>
+using namespace std;
+
+class Array {
+    int arr[5];
+public:
+    int& operator[](int i) {
+        if(i<0 || i>=5) {
+            cout<<"Out of bounds";
+            exit(0);
+        }
+        return arr[i];
+    }
+};
+
+int main() {
+    Array a;
+    a[0]=10;
+    a[1]=20;
+    cout<<a[0]<<" "<<a[1];
+    return 0;
+}
+
+ques 9:
+#include<iostream>
+using namespace std;
+
+class Test {
+public:
+    void operator()(int a, int b) {
+        cout<<a+b;
+    }
+};
+
+int main() {
+    Test t;
+    t(5,10);
+    return 0;
+}
+
+ques 10:
+#include<iostream>
+using namespace std;
+
+class Student {
+    int roll;
+public:
+    friend istream& operator>>(istream &in, Student &s) {
+        in>>s.roll;
+        return in;
+    }
+
+    friend ostream& operator<<(ostream &out, Student &s) {
+        out<<s.roll;
+        return out;
+    }
+};
+
+int main() {
+    Student s;
+    cin>>s;
+    cout<<s;
+    return 0;
+}
+
+ques 11:
+#include<iostream>
+using namespace std;
+
+class Test {
+    float x;
+public:
+    Test(float a) {
+        x = a;
+    }
+
+    void show() {
+        cout<<x;
+    }
+};
+
+int main() {
+    float a = 5.5;
+    Test t = a;
+    t.show();
+    return 0;
+}
+
+ques 12:
+#include<iostream>
+using namespace std;
+
+class Test {
+    float x;
+public:
+    Test(float a) { x=a; }
+
+    operator float() {
+        return x;
+    }
+};
+
+int main() {
+    Test t(5.5);
+    float a = t;
+    cout<<a;
+    return 0;
+}
+
+ques 13:
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+class Cartesian;
+
+class Polar {
+    float r, theta;
+public:
+    Polar(float r, float t) {
+        this->r = r;
+        this->theta = t;
+    }
+
+    operator Cartesian();
+};
+
+class Cartesian {
+    float x,y;
+public:
+    Cartesian() {}
+
+    Cartesian(float x,float y) {
+        this->x=x;
+        this->y=y;
+    }
+
+    void show() {
+        cout<<x<<" "<<y;
+    }
+};
+
+Polar::operator Cartesian() {
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+    return Cartesian(x,y);
+}
+
+int main() {
+    Polar p(10,5);
+    Cartesian c = p;
+    c.show();
+    return 0;
+}
